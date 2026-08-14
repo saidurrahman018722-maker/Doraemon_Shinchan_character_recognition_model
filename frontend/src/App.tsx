@@ -2,8 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Upload, Sparkles, AlertCircle, RefreshCw, CheckCircle2, Image as ImageIcon, Info, Heart } from 'lucide-react';
 import axios from 'axios';
 
-// Use hardcoded Render API URL to bypass Vercel configuration requirements
-axios.defaults.baseURL = 'https://doraemon-shinchan-character-recognition-gvn5.onrender.com';
+// Using explicit absolute URLs for Axios to avoid Vercel/Vite path resolution issues
 
 interface TopPrediction {
   class_name: string;
@@ -39,8 +38,8 @@ export default function App() {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    // Fetch characters list from backend API
-    axios.get('/api/characters')
+    // Fetch characters list from backend API using full absolute URL
+    axios.get('https://doraemon-shinchan-character-recognition-gvn5.onrender.com/api/characters')
       .then(res => {
         if (res.data && res.data.characters) {
           setCharacters(res.data.characters);
@@ -95,7 +94,7 @@ export default function App() {
     formData.append('image', selectedFile);
 
     try {
-      const response = await axios.post('/api/upload', formData, {
+      const response = await axios.post('https://doraemon-shinchan-character-recognition-gvn5.onrender.com/api/upload', formData, {
         headers: { 'Content-Type': 'multipart/form-data' }
       });
       setResult(response.data);
