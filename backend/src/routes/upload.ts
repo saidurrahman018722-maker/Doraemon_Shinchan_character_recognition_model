@@ -35,7 +35,7 @@ router.post('/upload', upload.single('image'), async (req: Request, res: Respons
       contentType: file.mimetype,
     });
 
-    const mlServiceUrl = process.env.ML_SERVICE_URL || 'https://doraemon-shinchan-character-recognition.onrender.com';
+    const mlServiceUrl = process.env.ML_SERVICE_URL || 'https://doraemon-shinchan-ml-service.onrender.com';
     
     let mlResponse;
     try {
@@ -43,7 +43,7 @@ router.post('/upload', upload.single('image'), async (req: Request, res: Respons
         headers: {
           ...formData.getHeaders(),
         },
-        timeout: 15000,
+        timeout: 60000, // 60 seconds to handle Render free tier cold starts
       });
     } catch (err: any) {
       console.error('Error connecting to ML service:', err.message);
