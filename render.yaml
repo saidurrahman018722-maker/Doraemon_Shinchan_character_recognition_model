@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: doraemon-shinchan-backend
+    env: node
+    rootDir: backend
+    buildCommand: npm install && npx prisma generate && npm run build
+    startCommand: node dist/index.js
+    envVars:
+      - key: PORT
+        value: 3000
+      - key: ML_SERVICE_URL
+        sync: false
+
+  - type: web
+    name: doraemon-shinchan-ml-service
+    env: python
+    rootDir: ml_service
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn main:app -w 1 -k uvicorn.workers.UvicornWorker --bind 0.0.0.0:$PORT --timeout 120
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.0
