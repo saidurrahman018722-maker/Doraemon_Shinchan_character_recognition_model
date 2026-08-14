@@ -11,6 +11,7 @@ venv/
 env/
 *.pth
 *.pt
+!ml_service/doraemon_shinchan_model.pth
 
 # Datasets
 doraemon_shinchan_dataset/

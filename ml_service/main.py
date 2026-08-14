@@ -61,6 +61,7 @@ MODEL_PATH = os.path.join(os.path.dirname(__file__), 'doraemon_shinchan_model.pt
 if os.path.exists(MODEL_PATH):
     try:
         model.load_state_dict(torch.load(MODEL_PATH, map_location=device))
+        model.float() # Ensure model is in FP32 regardless of saved checkpoint dtype
         print(f"Successfully loaded model from {MODEL_PATH}")
     except Exception as e:
         print(f"Warning: Failed to load model weights: {e}")
