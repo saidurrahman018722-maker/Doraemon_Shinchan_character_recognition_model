@@ -3,17 +3,18 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = "file:./dev.db"
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model Character {
   id          Int      @id @default(autoincrement())
-  name        String   @unique
+  key         String   @unique
   displayName String
   series      String
   role        String
-  description String
+  color       String
+  bio         String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }
