@@ -35,7 +35,7 @@ router.post('/upload', upload.single('image'), async (req: Request, res: Respons
       contentType: file.mimetype,
     });
 
-    const mlServiceUrl = process.env.ML_SERVICE_URL || 'http://localhost:8000';
+    const mlServiceUrl = process.env.ML_SERVICE_URL || 'https://doraemon-shinchan-character-recognition.onrender.com';
     
     let mlResponse;
     try {
