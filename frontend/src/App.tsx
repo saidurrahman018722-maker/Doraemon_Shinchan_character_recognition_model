@@ -2,8 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Upload, Sparkles, AlertCircle, RefreshCw, CheckCircle2, Image as ImageIcon, Info, Heart } from 'lucide-react';
 import axios from 'axios';
 
-// Use environment variable for API URL in production, fallback to relative path (for local proxy/Vercel rewrites)
-axios.defaults.baseURL = import.meta.env.VITE_API_URL || '';
+// Use hardcoded Render API URL to bypass Vercel configuration requirements
+axios.defaults.baseURL = 'https://doraemon-shinchan-character-recognition-gvn5.onrender.com';
 
 interface TopPrediction {
   class_name: string;
